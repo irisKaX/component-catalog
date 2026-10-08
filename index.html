@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Katalog komponent</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="components.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="catalog-layout">
+    <aside class="catalog-sidebar" aria-label="Navigace katalogu">
+      <a class="catalog-brand" href="#top" aria-label="Katalog komponent, úvod">
+        <span class="catalog-brand-icon" aria-hidden="true">▦</span>
+        <span>KOMPONENTY <small>UI KATALOG</small></span>
+      </a>
+      <div class="catalog-sidebar-section">
+        <p class="catalog-sidebar-label">KNIHOVNA</p>
+        <button class="catalog-nav-item is-active" type="button" data-category="all"><span>Všechny komponenty</span><span class="catalog-count" id="catalog-total-side">0</span></button>
+        <div id="catalog-category-list" class="catalog-category-list"></div>
+      </div>
+      <div class="catalog-sidebar-footer">HTML / CSS / JS <span>v1.0</span></div>
+    </aside>
+
+    <div class="catalog-main-wrap" id="top">
+      <header class="catalog-header">
+        <button class="catalog-menu-button" id="catalog-menu-button" type="button" aria-label="Otevřít navigaci" aria-expanded="false">☰</button>
+        <span class="catalog-breadcrumb">KNIHOVNA <span>/</span> <strong id="catalog-breadcrumb-current">Všechny komponenty</strong></span>
+        <button class="catalog-theme-button" type="button" id="catalog-theme-button" aria-label="Přepnout barevný režim" title="Přepnout barevný režim">◐</button>
+      </header>
+
+      <main class="catalog-main">
+        <div class="catalog-intro">
+          <div><p class="catalog-eyebrow">DESIGN SYSTEM / KNIHOVNA</p><h1>KATALOG KOMPONENT</h1><p class="catalog-description">Jedno místo pro přehled, náhled a správu HTML, CSS a JavaScript komponent.</p></div>
+          <div class="catalog-summary"><strong id="catalog-total">0</strong><span>komponent</span></div>
+        </div>
+
+        <div class="catalog-toolbar">
+          <label class="catalog-search"><span aria-hidden="true">⌕</span><input id="catalog-search" type="search" placeholder="Hledat komponentu..." autocomplete="off" aria-label="Hledat komponentu"><kbd>/</kbd></label>
+          <select class="catalog-sort" id="catalog-sort" aria-label="Seřadit komponenty"><option value="newest">Nejnovější</option><option value="name">Podle názvu</option><option value="oldest">Nejstarší</option></select>
+        </div>
+        <div class="catalog-section-heading"><h2 id="catalog-section-title">Všechny komponenty</h2><span id="catalog-results">0 položek</span></div>
+        <div id="catalog-grid" class="catalog-grid" aria-live="polite"></div>
+        <div class="catalog-empty" id="catalog-empty" hidden><div class="catalog-empty-icon" aria-hidden="true">▧</div><h3 id="catalog-empty-title">Zatím tu nic není</h3><p id="catalog-empty-description">Katalog je připravený. Jakmile přidáme první komponentu, objeví se právě tady.</p></div>
+      </main>
+    </div>
+  </div>
+
+  <dialog class="catalog-dialog" id="catalog-dialog" aria-labelledby="catalog-dialog-title">
+    <div class="catalog-dialog-header"><div><p class="catalog-eyebrow" id="catalog-dialog-category"></p><h2 id="catalog-dialog-title"></h2></div><button id="catalog-close-dialog" class="catalog-icon-button" type="button" aria-label="Zavřít">×</button></div>
+    <p id="catalog-dialog-description" class="catalog-dialog-description"></p>
+    <div class="catalog-tabs" role="tablist" aria-label="Zobrazení komponenty">
+      <button type="button" class="catalog-tab is-active" role="tab" aria-selected="true" data-tab="preview">Náhled</button>
+      <button type="button" class="catalog-tab" role="tab" aria-selected="false" data-tab="html">HTML</button>
+      <button type="button" class="catalog-tab" role="tab" aria-selected="false" data-tab="css">CSS</button>
+      <button type="button" class="catalog-tab" role="tab" aria-selected="false" data-tab="js">JS</button>
+    </div>
+    <div class="catalog-dialog-content"><iframe id="catalog-preview" class="catalog-preview" title="Náhled komponenty" sandbox="allow-scripts"></iframe><pre class="catalog-code" id="catalog-code" hidden><code id="catalog-code-content"></code></pre></div>
+    <div class="catalog-dialog-footer"><span id="catalog-dialog-id"></span><button class="catalog-copy-button" type="button" id="catalog-copy-button" hidden>Kopírovat kód</button></div>
+  </dialog>
+  <div class="catalog-overlay" id="catalog-overlay" hidden></div>
+</body>
+</html>
