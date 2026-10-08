@@ -157,5 +157,77 @@ window.catalogComponents = [
 @keyframes cmp-download-circle-delete {to {opacity: 0; visibility: hidden;} }
 @keyframes cmp-download-show-open {to {opacity: 1; visibility: visible; right: 56px;} }`,
     js: ''
+  },
+  {
+    id: 'menu-toggle-animated',
+    name: 'Animovaná hamburger ikona',
+    category: 'Navigace',
+    description: 'Třířádková ikona menu, která se po kliknutí plynule mění na křížek. Čisté HTML a CSS.',
+    html: `<div class="cmp-menu">
+  <input class="cmp-menu-input" type="checkbox" id="cmp-menu-toggle" aria-label="Otevřít nebo zavřít menu" />
+  <label class="cmp-menu-toggle" for="cmp-menu-toggle" aria-label="Přepnout menu">
+    <span class="cmp-menu-bar cmp-menu-bar-first"></span>
+    <span class="cmp-menu-bar cmp-menu-bar-middle"></span>
+    <span class="cmp-menu-bar cmp-menu-bar-last"></span>
+  </label>
+</div>`,
+    css: `.cmp-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 120px;
+}
+.cmp-menu, .cmp-menu * { box-sizing: border-box; }
+.cmp-menu-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+.cmp-menu-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform .5s;
+}
+.cmp-menu-bar {
+  width: 100%;
+  height: 4px;
+  flex-shrink: 0;
+  background-color: rgb(176, 92, 255);
+  border-radius: 4px;
+}
+.cmp-menu-bar-middle { transition: transform .8s; }
+.cmp-menu-bar-first, .cmp-menu-bar-last { width: 70%; }
+.cmp-menu-input:focus-visible + .cmp-menu-toggle {
+  outline: 2px solid rgb(176, 92, 255);
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+.cmp-menu-input:checked + .cmp-menu-toggle .cmp-menu-bar {
+  position: absolute;
+  transition: transform .5s, width .5s;
+}
+.cmp-menu-input:checked + .cmp-menu-toggle .cmp-menu-bar-middle {
+  transform: scaleX(0);
+}
+.cmp-menu-input:checked + .cmp-menu-toggle .cmp-menu-bar-first {
+  width: 100%;
+  transform: rotate(45deg);
+}
+.cmp-menu-input:checked + .cmp-menu-toggle .cmp-menu-bar-last {
+  width: 100%;
+  transform: rotate(-45deg);
+}
+.cmp-menu-input:checked + .cmp-menu-toggle {
+  transform: rotate(180deg);
+}`,
+    js: ''
   }
 ];
