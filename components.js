@@ -229,5 +229,93 @@ window.catalogComponents = [
   transform: rotate(180deg);
 }`,
     js: ''
+  },
+  {
+    id: 'gradient-explore-button',
+    name: 'Gradientové tlačítko Explore Now',
+    category: 'Tlačítka',
+    description: 'Tmavé zaoblené tlačítko s rotujícím gradientovým okrajem, barevným textem a animací šipek při najetí.',
+    html: `<div class="cmp-explore">
+  <button class="cmp-explore-button" type="button">
+    <span class="cmp-explore-border" aria-hidden="true"></span>
+    <span class="cmp-explore-content">
+      <svg class="cmp-explore-icon cmp-explore-icon-left" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M11 19l-7-7 7-7m8 14l-7-7 7-7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+      </svg>
+      <span class="cmp-explore-text">Explore Now</span>
+      <svg class="cmp-explore-icon cmp-explore-icon-right" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M13 5l7 7-7 7M5 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" />
+      </svg>
+    </span>
+  </button>
+</div>`,
+    css: `.cmp-explore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.cmp-explore, .cmp-explore * { box-sizing: border-box; }
+.cmp-explore-button {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  padding: 2px;
+  border: 0;
+  border-radius: 9999px;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.cmp-explore-button:focus-visible {
+  outline: 2px solid #94a3b8;
+  outline-offset: 4px;
+}
+.cmp-explore-border {
+  position: absolute;
+  inset: -1000%;
+  background: linear-gradient(to right, #db2777, #9333ea, #2563eb);
+  animation: cmp-explore-spin 2s linear infinite;
+}
+.cmp-explore-content {
+  position: relative;
+  display: inline-flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  border-radius: 9999px;
+  background: #020617;
+  backdrop-filter: blur(64px);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color .3s;
+}
+.cmp-explore-button:hover .cmp-explore-content { background: rgba(2, 6, 23, .9); }
+.cmp-explore-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  transition: transform .3s;
+}
+.cmp-explore-icon-left { margin-right: 8px; color: #ec4899; }
+.cmp-explore-icon-right { margin-left: 8px; color: #3b82f6; }
+.cmp-explore-button:hover .cmp-explore-icon-left { transform: translateX(-4px); }
+.cmp-explore-button:hover .cmp-explore-icon-right { transform: translateX(4px); }
+.cmp-explore-text {
+  background: linear-gradient(to right, #ec4899, #a855f7, #3b82f6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 600;
+}
+@keyframes cmp-explore-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .cmp-explore-border { animation: none; }
+  .cmp-explore-icon { transition: none; }
+}`,
+    js: ''
   }
 ];
