@@ -10,7 +10,17 @@
   const code = get('catalog-code');
   const tabs = document.querySelectorAll('[data-tab]');
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
-  const source = item => `<!doctype html><html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font-family:system-ui,sans-serif;margin:0;padding:20px;min-height:100%;box-sizing:border-box;display:grid;place-items:center;} ${String(item.css ?? '').replace(/<\/style/gi, '<\\/style')}</style></head><body>${item.html ?? ''}<script>${String(item.js ?? '').replace(/<\/script/gi, '<\\/script')}<\/script></body></html>`.replace('<\\/script>', '</script>');
+  const source = item => {
+    const css = String(item.css ?? '').replace(/<\/style/gi, '<\\/style');
+    const js = String(item.js ?? '').replace(/<\/script/gi, '<\\/script');
+    const script = js.trim() ? '<script>' + js + '</' + 'script>' : '';
+    return '<!doctype html><html lang="cs"><head><meta charset="utf-8">' +
+      '<meta name="viewport" content="width=device-width,initial-scale=1">' +
+      '<style>html,body{min-height:100%;margin:0}body{box-sizing:border-box;min-height:100vh;' +
+      'display:flex;align-items:center;justify-content:center;padding:20px;font-family:Arial,Helvetica,sans-serif;}' +
+      '*,*::before,*::after{box-sizing:border-box}' + css + '</style></head><body>' +
+      String(item.html ?? '') + script + '</body></html>';
+  };
   const filtered = () => {
     let result = components.filter(item => (state.category === 'all' || item.category === state.category) && [item.name, item.description, item.category, item.id].some(value => String(value ?? '').toLocaleLowerCase('cs').includes(state.search)));
     if (state.sort === 'name') result.sort((a,b) => a.name.localeCompare(b.name, 'cs'));
